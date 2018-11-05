@@ -15,7 +15,7 @@ namespace Marta_M.Repository.PublisherRepository
         {
             this.context = context;
         }
-        public IUnitOfWork unitOfWork => context;
+        public IUnitOfWork UnitOfWork => context;
 
         public List<Publisher> GetAll()
         {
@@ -33,7 +33,7 @@ namespace Marta_M.Repository.PublisherRepository
             context.SaveChanges();
         }
 
-        public void UpDate(Publisher publisher)
+        public void Update(Publisher publisher)
         {
             context.Set<Publisher>().Update(publisher);
             context.SaveChanges();

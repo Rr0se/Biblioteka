@@ -11,10 +11,12 @@ namespace Marta_M.Entieties
         public int Id { get; set; }
         public string Title { get; set; }
         public DateTime DatePublication { get; set; }
-        public decimal price1 { get; set; }
-        public decimal price2 { get; set; }
-        public ICollection<AuthorBook> AuthorBooks { get; set; }
+        public decimal BasePrice { get; set; }
+        public decimal CurrentPrice { get; set; }
 
+        public int PublisherId { get; set; }
+        public Publisher Publisher { get; set; }
+        public ICollection<AuthorBook> AuthorBooks { get; set; }
         public ICollection<GenreBook> GenreBooks { get; set; }
 
     }

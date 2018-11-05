@@ -15,7 +15,7 @@ namespace Marta_M.Repository.GenreRepository
         {
             this.context = context;
         }
-        public IUnitOfWork unitOfWork => context;
+        public IUnitOfWork UnitOfWork => context;
         
         public List<Genre> GetAll()
         {
@@ -33,7 +33,7 @@ namespace Marta_M.Repository.GenreRepository
             context.SaveChanges();
         }
 
-        public void UpDate(Genre genre)
+        public void Update(Genre genre)
         {
             context.Set<Genre>().Update(genre);
             context.SaveChanges();

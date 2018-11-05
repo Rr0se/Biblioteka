@@ -17,7 +17,7 @@ namespace Marta_M.Repository.AuthorRepository
         {
             this.context = context;
         }
-        public IUnitOfWork unitOfWork => context;
+        public IUnitOfWork UnitOfWork => context;
 
         public List<Author> GetAll()
         {
@@ -33,7 +33,7 @@ namespace Marta_M.Repository.AuthorRepository
             context.SaveChanges();
 
         }
-        public void UpDate(Author author)
+        public void Update(Author author)
         {
             context.Set<Author>().Update(author);
             context.SaveChanges();
@@ -47,6 +47,6 @@ namespace Marta_M.Repository.AuthorRepository
             context.SaveChanges();
             //return StatusCode((int)HttpStatusCode.OK);
         }
-
+        
     }
 }

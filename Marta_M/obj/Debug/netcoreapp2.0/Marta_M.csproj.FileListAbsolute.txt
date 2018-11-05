@@ -19,3 +19,14 @@ C:\Users\marta\Documents\Marta_M\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.Assembl
 C:\Users\marta\Documents\Marta_M\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.AssemblyInfo.cs
 C:\Users\marta\Documents\Marta_M\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.dll
 C:\Users\marta\Documents\Marta_M\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.pdb
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.csprojResolveAssemblyReference.cache
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.csproj.CoreCompileInputs.cache
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.AssemblyInfoInputs.cache
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.AssemblyInfo.cs
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.dll
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\obj\Debug\netcoreapp2.0\Marta_M.pdb
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\bin\Debug\netcoreapp2.0\Marta_M.deps.json
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\bin\Debug\netcoreapp2.0\Marta_M.runtimeconfig.json
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\bin\Debug\netcoreapp2.0\Marta_M.runtimeconfig.dev.json
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\bin\Debug\netcoreapp2.0\Marta_M.dll
+C:\Users\it-solve\Desktop\materiały\Biblioteka\Marta_M\bin\Debug\netcoreapp2.0\Marta_M.pdb

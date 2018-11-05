@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Marta_M.Repository.AuthorRepository;
 using Marta_M.Repository.PublisherRepository;
+using Marta_M.Utils;
 
 namespace Marta_M.Controllers
 {
@@ -36,20 +37,50 @@ namespace Marta_M.Controllers
 
         // POST: api/Publisher
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]Publisher publisher)
         {
+            try
+            {
+                _rep.Insert(publisher);
+                _rep.UnitOfWork.SaveChanges();
+                return CreatedAtRoute("GetGenre", new { id = publisher.Id }, ApiResponse.Ok(publisher));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ApiResponse.Error(publisher, e.Message));
+            }
         }
 
         // PUT: api/Publisher/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]Publisher publisher)
         {
+            try
+            {
+                _rep.Update(publisher);
+                _rep.UnitOfWork.SaveChanges();
+                return Ok(ApiResponse.Ok(publisher));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ApiResponse.Error(id, e.Message));
+            }
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                _rep.Delete(id);
+                _rep.UnitOfWork.SaveChanges();
+                return Ok(ApiResponse.Ok(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ApiResponse.Error(id, e.Message));
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Marta_M.Repository.AuthorRepository;
 using Marta_M.Repository.GenreRepository;
+using Marta_M.Utils;
 
 namespace Marta_M.Controllers
 {
@@ -20,36 +21,71 @@ namespace Marta_M.Controllers
         {
             _rep = rep;
         }
-        // GET: api/Genre
+        // GET: api/Genres
         [HttpGet]
-        public IEnumerable<Genre> Get()
+        public IActionResult Get()
         {
-            return _rep.GetAll();
+            return Ok(_rep.GetAll());
         }
 
-        // GET: api/Genre/5
-        [HttpGet("{id}", Name = "Get")]
-        public Genre Get(int id)
+        // GET: api/Genres/5
+        [HttpGet("{id}", Name = "GetGenre")]
+        public IActionResult Get(int id)
         {
-            return _rep.FindById(id);
+            var genre = _rep.FindById(id);
+            if (genre != null)
+                return Ok(genre);
+            else
+                return NotFound();
         }
 
-        // POST: api/Genre
+        // POST: api/Genres
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody] Genre genre)
         {
+            try
+            {
+                _rep.Insert(genre);
+                _rep.UnitOfWork.SaveChanges();
+                return CreatedAtRoute("GetGenre", new { id = genre.Id }, ApiResponse.Ok(genre));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ApiResponse.Error(genre, e.Message));
+            }
         }
 
-        // PUT: api/Genre/5
+        // PUT: api/Genres/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]Genre genre)
         {
+            try
+            {
+                _rep.Update(genre);
+                _rep.UnitOfWork.SaveChanges();
+                return Ok(ApiResponse.Ok(genre));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ApiResponse.Error(id, e.Message));
+            }
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            try
+            {
+                _rep.Delete(id);
+                _rep.UnitOfWork.SaveChanges();
+                return Ok(ApiResponse.Ok(id));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(ApiResponse.Error(id, e.Message));
+            }
+
         }
     }
 }

@@ -20,10 +20,10 @@ namespace Marta_M.Entities
                 {
                     var books = new List<Book>()
                     {
-                        new Book(){Title="Pan Tadeusz", DatePublication=new DateTime(1992), price1= 12, price2= 10 },
-                        new Book(){Title="Przedwiośnie", DatePublication=new DateTime(1976), price1= 22, price2= 20 },
-                        new Book(){Title="W pustyni i w puszczy", DatePublication=new DateTime(1942), price1= 33, price2= 30 },
-                        new Book(){Title="Asiunia", DatePublication=new DateTime(1982), price1= 44, price2= 40 },
+                        new Book(){Title="Pan Tadeusz", DatePublication=new DateTime(1992), BasePrice= 12, CurrentPrice= 10 },
+                        new Book(){Title="Przedwiośnie", DatePublication=new DateTime(1976), BasePrice= 22, CurrentPrice= 20 },
+                        new Book(){Title="W pustyni i w puszczy", DatePublication=new DateTime(1942), BasePrice= 33, CurrentPrice= 30 },
+                        new Book(){Title="Asiunia", DatePublication=new DateTime(1982), BasePrice= 44, CurrentPrice= 40 },
 
                     };
 
