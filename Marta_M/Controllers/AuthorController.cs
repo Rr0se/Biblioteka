@@ -28,7 +28,7 @@ namespace Marta_M.Controllers
         }
 
         // GET: api/Author/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetAuthor")]
         public IActionResult Get(int id)
         {
             var author = _rep.FindById(id);

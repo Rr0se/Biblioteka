@@ -27,7 +27,7 @@ namespace Marta_M.Controllers
         }
 
         // GET: api/Book/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetBook")]
         public IActionResult Get(int id)
         {
             var book = _rep.FindById(id);
@@ -45,7 +45,7 @@ namespace Marta_M.Controllers
             {
                 _rep.Insert(book);
                 _rep.UnitOfWork.SaveChanges();
-                return CreatedAtRoute("GetBooks", new { id = book.Id }, ApiResponse.Ok(book));
+                return CreatedAtRoute("GetBook", new { id = book.Id }, ApiResponse.Ok(book));
             }
             catch (Exception ex)
             {

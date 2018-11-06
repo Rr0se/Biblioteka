@@ -1,96 +1,70 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Marta_M.Entities;
-using Marta_M.Repository.AuthorRepository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Swagger;
 
 namespace Marta_M
 {
     public class Startup
     {
-        public void ConfigureServices(IServiceCollection services)
+        public Startup(IConfiguration configuration)
         {
-            //services.AddDbContext<DataBaseContext>(opt =>
-            //    opt.UseInMemoryDatabase("EmployeeList"));
-            services.AddMvc();
-
-            var connectionString = @"Server=(localdb)\mssqllocaldb;Database=DbBook;Trusted_Connection=True;";
-            //var connectionString = @"Server=DESKTOP-18VF6FQ\SQLEXPRESS;Database=DbBook;Trusted_Connection=True;";
-            services.AddDbContext<DataBaseContext>(o => o.UseSqlServer(connectionString));
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info { Title = "API", Version = "v1" });
-                c.DescribeAllEnumsAsStrings();
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-                });
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                {
-                    { "Bearer", new string[] { } }
-                });
-            });
-
-            //register repo
-            //services.AddScoped<IProfileGeneratorServices, ProfileGeneratorServices>();
-            //services.AddCors();
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials()
-                        .SetPreflightMaxAge(TimeSpan.FromSeconds(2520))
-                        .Build());
-            });
-
-            services.AddScoped<IAuthorsRepository, AuthorsRepository>();
-
+            Configuration = configuration;
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataBaseContext dataBaseContext)
-        {
+        public IConfiguration Configuration { get; }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            // In production, the Angular files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                configuration.RootPath = "ClientApp/dist";
+            });
+        }
+
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller}/{action=Index}/{id?}");
             });
 
+            app.UseSpa(spa =>
+            {
+                // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                // see https://go.microsoft.com/fwlink/?linkid=864501
 
-            //AutoMapper.Mapper.Initialize(cfg =>
-            //{
-            //    cfg.CreateMap<Entities.Employee, Models.Profile>()
-            //        .ForMember(dest => dest.Name, opt => opt.MapFrom(src =>
-            //           $"{src.FirstName} {src.LastName} {src.Specialization} {src.YearsOfWork}"));
+                spa.Options.SourcePath = "ClientApp";
 
-            //    cfg.CreateMap<InputModels.EmployeeInputModel, Entities.Employee>();
-            //});
-
-            //app.UseCors(builder =>
-            //    builder.WithOrigins("http://localhost:19586/#/Book"));
-
-            app.UseCors("CorsPolicy");
-            app.UseMvc();
-
-
-
-
+                if (env.IsDevelopment())
+                {
+                    spa.UseAngularCliServer(npmScript: "start");
+                }
+            });
         }
     }
 }

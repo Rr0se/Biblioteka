@@ -29,7 +29,7 @@ namespace Marta_M.Controllers
         }
 
         // GET: api/Publisher/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetPublisher")]
         public Publisher Get(int id)
         {
             return _rep.FindById(id);
@@ -43,7 +43,7 @@ namespace Marta_M.Controllers
             {
                 _rep.Insert(publisher);
                 _rep.UnitOfWork.SaveChanges();
-                return CreatedAtRoute("GetGenre", new { id = publisher.Id }, ApiResponse.Ok(publisher));
+                return CreatedAtRoute("GetPublisher", new { id = publisher.Id }, ApiResponse.Ok(publisher));
             }
             catch (Exception e)
             {
