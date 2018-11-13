@@ -1,0 +1,69 @@
+<div class='col-xs-6'>
+  <button (click)="add(student)" class="btn btn-primary">Dodaj</button>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>
+          lp.
+        </th>
+        <th> Imię</th>
+        <th> Nazwisko</th>
+        <th> Stypendium</th>
+        <th></th>
+      </tr>
+    </thead>
+  </table>
+</div>
+
+<tbody>
+  <tr *ngFor="let student of students; let i=index">
+    <td> {{i+1}}</td>
+    <td>{{student.FirstName}}</td>
+    <td>{{student.LastName}}</td>
+    <td>{{student.Grant}}</td>
+    <td>
+      <button (click)="edit(student)" class="btn btn-se btn-primary">Edytuj</button>
+      <button (click)="delete(student)" class="btn btn-se btn-primary">Usuń</button>
+    </td>
+  </tr>
+
+</tbody>
+<tfoot>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>Suma</td>
+    <td>{{sum}}</td>
+    <td></td>
+  </tr>
+</tfoot>
+<div class="col-xs-6">
+  <div *ngIf="editObject">
+    <div class="form-group">
+      <label class="control-label col-xs-3">Imię</label>
+      <div class="col-xs-9">
+        <input class="form-control" {[ngModel]}="editObject.FristName" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-xs-3">Nazwisko</label>
+      <div class="col-xs-9">
+        <input class="form-control" {[ngModel]}="editObject.LastName" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label col-xs-3">Stypendium</label>
+      <div class="col-xs-9">
+        <input class="form-control" {[ngModel]}="editObject.Grant" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button (click)="save()" class="btn  btn-succes">Zatwierdź</button>
+      <button (click)="cancel()" class="btn btn-warning">Anuluj</button>
+    </div>
+
+  </div>
+</div>
