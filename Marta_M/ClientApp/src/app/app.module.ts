@@ -7,6 +7,8 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { FirstComponent } from './first/first.component';
 import { StudentComponent } from './student/student.component';
+import { StudentsService } from './data-services/students.service';
+import { StudentsLsService } from './data-services/students-ls.service';
 
 
 @NgModule({
@@ -21,7 +23,7 @@ import { StudentComponent } from './student/student.component';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [{ provide: StudentsService, useClass: StudentsLsService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

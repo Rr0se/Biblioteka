@@ -1,7 +1,6 @@
 <div class='col-xs-6'>
-  <button (click)="add(student)" class="btn btn-primary">Dodaj</button>
+  <button (click)="add()" class="btn btn-primary">Dodaj</button>
   <table class="table table-striped">
-    <thead>
       <tr>
         <th>
           lp.
@@ -11,11 +10,7 @@
         <th> Stypendium</th>
         <th></th>
       </tr>
-    </thead>
-  </table>
-</div>
-
-<tbody>
+    
   <tr *ngFor="let student of students; let i=index">
     <td> {{i+1}}</td>
     <td>{{student.FirstName}}</td>
@@ -27,8 +22,6 @@
     </td>
   </tr>
 
-</tbody>
-<tfoot>
   <tr>
     <td></td>
     <td></td>
@@ -36,33 +29,36 @@
     <td>{{sum}}</td>
     <td></td>
   </tr>
-</tfoot>
+</table>
+  </div>
+
+
 <div class="col-xs-6">
-  <div *ngIf="editObject">
+  <div *ngIf="editStudent">
     <div class="form-group">
       <label class="control-label col-xs-3">Imię</label>
       <div class="col-xs-9">
-        <input class="form-control" {[ngModel]}="editObject.FristName" />
+        <input class="form-control" formControlName="FirstName" type="name" name="FirstName" placeholder="Podaj Imię"/>
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-xs-3">Nazwisko</label>
       <div class="col-xs-9">
-        <input class="form-control" {[ngModel]}="editObject.LastName" />
+        <input class="form-control" formControlName="lastName" type="name" name="LastName" placeholder="Podaj Nazwisko"/>
       </div>
     </div>
 
     <div class="form-group">
       <label class="control-label col-xs-3">Stypendium</label>
       <div class="col-xs-9">
-        <input class="form-control" {[ngModel]}="editObject.Grant" />
+        <input class="form-control" formControlName="Grant" type="number" name="grant" placeholder="Podaj kwotę stypy" />
       </div>
     </div>
 
     <div class="form-group">
-      <button (click)="save()" class="btn  btn-succes">Zatwierdź</button>
-      <button (click)="cancel()" class="btn btn-warning">Anuluj</button>
+      <button type="submit" (click)="save()" class="btn  btn-succes">Zatwierdź</button>
+      <button type="button" (click)="cancel()" class="btn btn-warning">Anuluj</button>
     </div>
 
   </div>
